@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoppers Paradise</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+
+
+        /* Define the CSS for the black fixed menu bar */
+#menu-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    z-index: 100;
+    display:inline-flex; /* Use flexbox for layout */
+    /* justify-content: space-between; Push the site name and menu to the sides */
+    align-items: center; /* Vertically center the content within the menu bar */
+    
+}
+#one{
+    position: absolute;
+    left: 20%;
+}
+
+#two{
+    position: absolute;
+    right: 10%;
+    float: right;
+}
+
+/* Style the logo */
+#logo {
+    margin-right: 0; /* Remove the margin to eliminate the gap */
+}
+
+/* Style the logo image */
+#logo img {
+    width: 40px; /* Set the logo width as needed */
+    height: auto;
+    overflow: hidden;
+}
+
+/* Style the site name */
+#site-name h1 {
+    font-size: 24px;
+    margin: 0; /* Remove default margin */
+    opacity: 1;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateX(0);
+    color: white;
+}
+
+/* Slide the site name under the logo and make it disappear when the user scrolls down */
+#menu-bar.scroll-down #site-name h1 {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+/* Style the menu options on the left */
+#menu-options {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+#menu-options li {
+    margin-right: 20px;
+}
+
+#menu-options a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Style the Support button with a darker color */
+#menu-right li:first-child a {
+    color: #a3a2a2; /* Darker color for the Support button */
+}
+
+/* Style the menu options on the right */
+#menu-right {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+#menu-right li {
+    margin-right: 20px;
+}
+
+#menu-right a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Style the offers bar */
+#offers-bar {
+    background-color: #FFA500; /* Change to the desired color */
+    color: white;
+    text-align: center;
+    padding: 1px;
+    margin-top: 62px;
+}
+
+
+
+
+
+
+
+
+
+        #container {
+            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        #left-half {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            width: 40%;
+        }
+
+        #right-half {
+            flex: 1;
+            padding: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        #buy-btn {
+            background-color: #2ecc71;
+            color: #fff;
+        }
+
+        #add-to-cart-btn {
+            margin-top: 10px;
+            background-color: #3498db;
+            color: #fff;
+            width: 300px;
+        }
+
+        .button-container {
+            display:block;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            flex: 1;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+        }
+
+        #right-half h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: purple;
+        }
+
+        #right-half p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: rgb(62, 81, 119);
+        }
+
+        .product-details {
+            margin-bottom: 20px;
+        }
+
+        .product-details h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .product-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .product-details li {
+            padding: 5px 0;
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Quantity Selector and Like/Dislike */
+        .quantity-like-dislike {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #quantity-selector {
+            display: flex;
+            align-items: center;
+        }
+
+        #quantity-label {
+            margin-right: 10px;
+            color: #555;
+        }
+
+        #quantity-input {
+            width: 50px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            color: #333;
+        }
+
+        .like-dislike-container {
+            display: flex;
+        }
+
+        .like-dislike-button {
+            flex: 1;
+            margin: 0 5px;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .like-dislike-button:hover {
+            background-color: #f5f5f5;
+        }
+
+        .payment-methods {
+            margin-top: 20px;
+        }
+
+        .payment-methods h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .payment-form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin-top: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-group select {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: relative;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+
+        <div id="menu-bar">
+            <div id="logo">
+                <img src="images/logo.png" alt="Logo">
+            </div>
+            <div id="site-name">
+                <h1>Shoppers Paradise</h1>
+            </div>
+            <div id="one">
+                <ul id="menu-options">
+                    <li><a href="#">Items</a></li>
+                    <li><a href="#">Price</a></li>
+                </ul>
+            </div>
+            <div id="two">
+                <ul id="menu-right">
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Region Selector</a></li>
+                    <li><a href="account.html">My Account</a></li>
+                    <li><a href="#">Cart</a></li>
+                    <li><a href="#">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div id="offers-bar">
+        <p>Use Coupon Code MRP65 Get Flat 65% OFF on MRP SHOP NOW ></p>
+    </div>
+
+    
+    <div id="container">
+        <div id="left-half">
+            <img src="images/p3.jpg" alt="Product Image">
+            <div id="btn">
+                <button id="add-to-cart-btn">Add to Cart</button>
+                
+            </div>
+        </div>
+        <div id="right-half">
+            <h1>Bonsai Tree Light for Room Decor</h1>
+            <p>Get the Kawaii Strawberry Bear Mini Diary—a must for cute enthusiasts. Perfect for students, writers, or
+                anyone who loves adorable items. Order now for a touch of fruity bear charm!!</p>
+            <p>Price: $590.00</p>
+
+            <!-- Additional Product Details -->
+            <div class="product-details">
+                <h2>Key Features:</h2>
+                <ul>
+                    <li>Aesthetic Lamps for Living Room</li>
+                    <li>Good Ideas for Gifts, Home Decorations,</li>
+                    <li>Warm White, 108 LED</li>
+                </ul>
+            </div>
+
+            <!-- Quantity Selector and Like/Dislike Buttons -->
+            <div class="quantity-like-dislike">
+                <div id="quantity-selector">
+                    <label id="quantity-label" for="quantity-input">Quantity:</label>
+                    <input type="number" id="quantity-input" value="1" min="1">
+                </div>
+                <div class="like-dislike-container">
+                    <button class="like-dislike-button">Like</button>
+                    <button class="like-dislike-button">Dislike</button>
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="payment-methods">
+                <h2>Payment Methods:</h2>
+                <form class="payment-form">
+                    <div class="form-group">
+                        <label for="payment-method">Select Payment Method:</label>
+                        <select id="payment-method" name="payment-method">
+                            <option value="credit-card">Credit Card</option>
+                            <option value="debit-card">Debit Card</option>
+                            <option value="upi">UPI</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="card-number">Card Number:</label>
+                        <input type="text" id="card-number" name="card-number" placeholder="Enter card number">
+                    </div>
+                    <div class="form-group">
+                        <label for="expiry-date">Expiry Date:</label>
+                        <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV:</label>
+                        <input type="text" id="cvv" name="cvv" placeholder="Enter CVV">
+                    </div>
+                    <div class="form-group">
+                        <label for="upi-id">UPI ID:</label>
+                        <input type="text" id="upi-id" name="upi-id" placeholder="Enter UPI ID">
+                    </div>
+                    <button id="buy-btn">Buy Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer>
+        &copy; 2023 Your E-commerce Store. All rights reserved.
+    </footer>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
